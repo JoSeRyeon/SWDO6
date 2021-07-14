@@ -4,13 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.swdo.test.service.StatisticService;
 import com.swdo.test.service.TimerService;
 import com.swdo.test.service.UserService;
+import com.swdo.test.service.kakaoService;
 import com.swdo.test.vo.TimerVO;
 import com.swdo.test.vo.UserVO;
 
@@ -25,6 +28,39 @@ public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+	
+	@Autowired
+	private kakaoService kakao;
+	
+	
+	
+	// 카카오 연동 가입
+	@RequestMapping(value = "/kakao_join", method = RequestMethod.GET)
+	public String kakao_join(@RequestParam("code") String code, Model model) {
+
+		//System.out.println(code);
+		UserVO data = kakao.getAccessToken_Join(code);
+        
+        service.userJoin(data);
+        
+        String path = login(data);
+
+		return path;
+	}
+	
+	// 카카오 로그인
+	@RequestMapping(value = "/kakao", method = RequestMethod.GET)
+	public String kakao(@RequestParam("code") String code, Model model) {
+		
+		//System.out.println(code);
+        UserVO data = kakao.getAccessToken(code);
+
+		String path = service.userLogin(data);
+
+		return path;
+	}
+	
+	
 	// 회원가입 폼이동
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
 	public String joinForm() {
@@ -118,6 +154,8 @@ public class UserController {
 	// 로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout() {
+		
+		
 
 		service.userLogout();
 

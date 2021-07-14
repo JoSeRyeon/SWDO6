@@ -3,9 +3,13 @@
 <!DOCTYPE html>
 <html>
 
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
+
+Kakao.init('470fd7a6155ae5841b6d4e52b40f8792'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
 var id_check = 0;
 
@@ -218,21 +222,7 @@ function id_ck(){
                                 </div>
                                 
                                 
-                                <!--  로그인 API 들어갈 곳 -->
-								                                
-								<!-- 네이버아이디로로그인 버튼 노출 영역 -->
-								 <div id="naver_id_login" align = "right"></div>
-								 
-								<!-- //네이버아이디로로그인 버튼 노출 영역 -->
-								 <script type="text/javascript">
-								  	var naver_id_login = new naver_id_login("WmC4JRYvaYkX4kMflUt2", "http://localhost:8882/user/collbackJoin");
-								  	var state = naver_id_login.getUniqState();
-								  	naver_id_login.setButton("white", 4,40);
-								  	//naver_id_login.setDomain("http://localhost:8882/user/loginForm");
-								  	naver_id_login.setState(state);
-								  	//naver_id_login.setPopup();
-								  	naver_id_login.init_naver_id_login();
-								 </script>
+                                
                                 
                                 
                                 <div class="row m-t-30">
@@ -246,7 +236,75 @@ function id_ck(){
                                         <input type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" value = "Sign up now.">
                                     </div>
                                 </div>
-                                <hr/>
+                                
+                                
+                                
+                                <!--  로그인 API 들어갈 곳 -->
+								                                
+								
+                                
+                                <div class="row m-t-30">
+                                	<div class="col-md-12" style="text-align : center;">
+                                	
+                                	<h6 class="text-center txt-primary">Social Sign Up</h6>
+                                
+                                	<hr/>                                
+								<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+								 <div id="naver_id_login" align="right" style = "display:none;">
+								 </div>
+								 
+								 <a href="#" id="naverLogin">
+								 	<img style="margin-top : 10px; height : 45px;"
+									    src="/resources/assets/images/btnG_square.png"
+									  />
+								 </a>
+								 
+								 <a id="custom-login-btn" href="javascript:loginWithKakao()">
+									  <img style="margin-top : 10px; height : 45px; margin-left : 10px"
+									    src="/resources/assets/images/kakao_stop_new.png"
+									  />
+								 </a>
+								 <p id="token-result"></p>
+								 
+								 </div>
+                                
+                                </div>
+								 
+								<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+								 <script type="text/javascript">
+								  	var naver_id_login = new naver_id_login("WmC4JRYvaYkX4kMflUt2", "http://localhost:8882/user/collbackJoin");
+								  	var state = naver_id_login.getUniqState();
+								  	//naver_id_login.setButton("green", 3,45);
+								  	//naver_id_login.setDomain("http://localhost:8882/user/loginForm");
+								  	naver_id_login.setState(state);
+								  	//naver_id_login.setPopup();
+								  	naver_id_login.init_naver_id_login();
+
+								  	$(document).on("click", "#naverLogin", function(){
+										var btnNaverLogin = document.getElementById("naver_id_login").firstChild;
+										btnNaverLogin.click();
+									});
+								 </script>
+								 
+								 
+								 
+								 
+								 
+								 
+									<script type="text/javascript">
+									  function loginWithKakao() {
+									    Kakao.Auth.authorize({
+									      redirectUri: 'http://localhost:8882/user/kakao_join'
+									    })
+									  }
+									 </script>
+									
+                                	<div class="row m-t-30">
+                                	
+                                    	<div class="col-md-12">
+                                        
+                                    	</div>
+                                	</div>
                                 
                                 
                                 <div class="row">

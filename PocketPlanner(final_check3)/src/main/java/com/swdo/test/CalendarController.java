@@ -31,20 +31,6 @@ public class CalendarController {
 
 	@Autowired
 	private CalendarService service;
-	@Autowired
-	private StatisticService sService;
-	
-	@RequestMapping(value = "/kakao", method = RequestMethod.GET)
-	public String kakao(@RequestParam("code") String auth, Model model) {
-		
-		System.out.println(auth);
-		
-        //String access_Token = kakaoService.getAccessToken(code);
-        //System.out.println("###access_Token#### : " + access_Token);
-
-		return "user/callback_kakao";
-	}
-	
 
 	// 캘린더 화면 이동
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
