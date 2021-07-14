@@ -78,7 +78,7 @@
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css">
 
-<script src="/resources/assets/js/calendar/calendar_script.js?ver=1"></script>
+<script src="/resources/assets/js/calendar/calendar_script.js"></script>
 
 
 </head>
