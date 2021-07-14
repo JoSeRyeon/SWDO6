@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.swdo.test.dao.UserMapper">
+
+<insert id="userJoin" parameterType="user" >
+
+
+	insert into user_tb(
+		user_id,
+		user_pw,
+		user_nm
+		)values(
+		#{user_id},
+		#{user_pw},
+		#{user_nm}
+		
+		)
+	
+	
+	)
+		
+
+</insert>
+
+
+
+</mapper>
