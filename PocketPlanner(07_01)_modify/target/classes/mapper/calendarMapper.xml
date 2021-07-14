@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.swdo.test.dao.CalendarMapper">
+
+<!-- 일정 추가 -->
+<insert id="planInsert" parameterType="plan" >
+	
+	insert into 
+		pocket_plan(
+			plan_num,
+			user_id,
+			plan_title,
+			plan_sdate,
+			plan_edate,
+			plan_content,
+			plan_allDay
+		)values(
+			pocket_plan_seq.nextval,
+			#{user_id},
+			#{plan_title},
+			#{plan_sdate},
+			#{plan_edate},
+			#{plan_content, jdbcType=VARCHAR},
+			#{plan_allDay}
+			)
+</insert>
+
+<!-- 특정 사용자의 일정 전부 조회-->
+<select id="planSelectAll" parameterType = "String" resultType="plan">
+
+select
+	plan_num,
+	user_id,
+	plan_title,
+	plan_achv,
+	plan_content,
+	plan_sdate,
+	plan_edate,
+	plan_allDay,
+	plan_color
+from
+pocket_plan
+where
+	user_id = #{user_id}
+order by
+	plan_num
+
+
+</select>
+
+<!-- 특정 사용자 일정 전부 삭제 -->
+<delete id="planDeleteAll" parameterType="String">
+
+delete
+	from 
+		pocket_plan
+	where
+		user_id = #{user_id}
+
+
+</delete>
+
+</mapper>
